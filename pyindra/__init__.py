@@ -20,7 +20,7 @@ TERMS = "terms"
 ONE = "one"
 MANY = "many"
 
-TOP = "top"
+TOPK = "topk"
 FILTER = "filter"
 
 #URLS
@@ -125,10 +125,10 @@ class Indra:
         elif pairs is None and one is not None and many is not None and t1 is None and t2 is None:
             return self._submit(POST_RELATEDNESS_ONE_TO_MANY.format(self._url), self._get_payload(one=one, many=many))
 
-    def nearest_neighbors(self, terms, type=NeighborsType.VECTORS, top=10, filter=None):
-        if isinstance(top, int) and top > 0:
-            payload = self._get_payload(terms)
-            payload[TOP] = top
+    def nearest_neighbors(self, terms, type=NeighborsType.VECTORS, topk=10, filter=None):
+        if isinstance(topk, int) and topk > 0:
+            payload = self._get_payload(terms=terms)
+            payload[TOPK] = topk
             payload[FILTER] = filter
 
             if type == NeighborsType.VECTORS:
